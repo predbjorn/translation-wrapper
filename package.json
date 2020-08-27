@@ -1,0 +1,20 @@
+{
+  "name": "translations-wrapper",
+  "author": "Preben Hafnor <prebenhafnor@gmail.com>",
+  "version": "0.0.2",
+  "main": "index.js",
+  "config": {
+    "dir": "locale"
+  },
+  "scripts": {
+    "re": "rm -rf locale && export DEBUG=app:* && node script/run.js",
+    "start": "export DEBUG=app:* && node script/run.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.4.2",
+    "debug": "^4.1.1",
+    "fs": "0.0.1-security",
+    "i18n-js": "^3.7.1",
+    "ramda": "^0.27.1"
+  }
+}
