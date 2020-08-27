@@ -1,10 +1,10 @@
 {
-  "name": "translations-wrapper",
+  "name": "translation-wrapper",
   "author": "Preben Hafnor <prebenhafnor@gmail.com>",
   "version": "0.0.2",
   "main": "index.js",
   "config": {
-    "dir": "locale"
+    "dir": "translation-wrapper"
   },
   "scripts": {
     "re": "rm -rf locale && export DEBUG=app:* && node script/run.js",

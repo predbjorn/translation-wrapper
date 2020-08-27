@@ -110,7 +110,7 @@ exports.run = (dir, localeStringsPath, templateLanguge) => {
   );
 };
 const createOrUpdatei18File = (path, languages) => {
-  fs.writeFileSync(`${path}/i18n.js`, i18File(languages), "utf8");
+  fs.writeFileSync(`${path}/dist/i18n.js`, i18File(languages), "utf8");
 };
 exports.createOrUpdatei18File = createOrUpdatei18File;
 
