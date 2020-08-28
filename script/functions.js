@@ -121,10 +121,8 @@ exports.init = (path) => {
   fs.mkdirSync(`${path}/dist`);
   fs.writeFileSync(`${path}/localeStrings.json`, DEFAULT_SHEET, "utf8");
   fs.writeFileSync(`${path}/package.json`, PACKAGE, "utf8");
-
-  // destination.txt will be created or overwritten by default.
   fs.copyFile(
-    `${__dirname}/script/configTemplate.js`,
+    `${__dirname}/configTemplate.js`,
     `${path}/configLocale.js`,
     (err) => {
       if (err) {

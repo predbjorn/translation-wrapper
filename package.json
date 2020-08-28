@@ -7,7 +7,7 @@
     "dir": "translation-wrapper"
   },
   "scripts": {
-    "re": "rm -rf locale && export DEBUG=app:* && node script/run.js",
+    "re": "rm -rf translationWrapper && export DEBUG=app:* && node script/run.js",
     "start": "node script/run.js"
   },
   "dependencies": {
@@ -18,6 +18,6 @@
     "ramda": "^0.27.1"
   },
   "bin": {
-    "translation-wrapper": "./script/run.js"
+    "translation-wrapper": "./bin/cli.js"
   }
 }

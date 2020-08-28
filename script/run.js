@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const fs = require("fs");
 const f = require("./functions");
 const { watchTemplate, watchConfigFile } = require("./watch");
@@ -25,6 +24,3 @@ if (!fs.existsSync(dir) && !fs.existsSync(dir + "/dist")) {
   watchTemplate(dir);
   watchConfigFile(dir);
 }
-
-//TODO: Create a script with arguments for changing location.
-//TODO: Arguments for changing logging.
