@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require("fs");
 const f = require("./functions");
 const { watchTemplate, watchConfigFile } = require("./watch");
