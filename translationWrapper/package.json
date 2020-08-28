@@ -1,5 +1,5 @@
 {
-	"name": "lang",
-	"version": "0.0.1",
-	"main": "./dist/translate"
+  "name": "translation-wrapper",
+  "version": "0.0.1",
+  "main": "./dist/translate"
 }

@@ -10,7 +10,7 @@ exports.DEFAULT_SHEET = `{
 }`;
 
 exports.PACKAGE = `{
-	"name": "lang",
+	"name": "tw",
 	"version": "0.0.1",
 	"main": "./dist/translate"
 }`;
