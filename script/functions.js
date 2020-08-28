@@ -124,7 +124,7 @@ exports.init = (path) => {
 
   // destination.txt will be created or overwritten by default.
   fs.copyFile(
-    "./script/configTemplate.js",
+    `${__dirname}/script/configTemplate.js`,
     `${path}/configLocale.js`,
     (err) => {
       if (err) {
