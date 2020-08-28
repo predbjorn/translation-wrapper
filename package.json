@@ -8,7 +8,7 @@
   },
   "scripts": {
     "re": "rm -rf locale && export DEBUG=app:* && node script/run.js",
-    "start": "export DEBUG=app:* && node script/run.js"
+    "start": "node script/run.js"
   },
   "dependencies": {
     "chokidar": "^3.4.2",
@@ -18,6 +18,6 @@
     "ramda": "^0.27.1"
   },
   "bin": {
-    "watch": "./script/run.js"
+    "translation-wrapper": "./script/run.js"
   }
 }
