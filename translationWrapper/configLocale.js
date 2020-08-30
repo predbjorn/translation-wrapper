@@ -1,7 +1,6 @@
-const tw = require("translation-wrapper");
 const FALL_BACK = "en";
 const TEMPLATE_LOCALE_LANGUAGE = "en"; // Set which language you are templating in
-const LANGUAGES = ["en"]; // sequenced by priority
+const LANGUAGES = ["en", "nb"]; // sequenced by priority
 
 /**
  * Returns the language set by your client
@@ -23,12 +22,9 @@ const defaultLocale = () => "en";
 //     : FALL_BACK;
 ///////////////////////////////////////////
 
-const localeToLang = tw.localeToLang;
-
 module.exports = {
   FALL_BACK,
   LANGUAGES,
   defaultLocale,
   TEMPLATE_LOCALE_LANGUAGE,
-  localeToLang,
 };

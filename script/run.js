@@ -24,3 +24,10 @@ if (!fs.existsSync(dir) && !fs.existsSync(dir + "/dist")) {
   watchTemplate(dir);
   watchConfigFile(dir);
 }
+
+// TODO:
+
+// Create a good readme
+// Update config when tempLanguages updates
+// Create a CLI with arguments (able to change folder etc.)
+// Alias ?
