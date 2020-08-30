@@ -6,6 +6,7 @@ const {
   i18File,
 } = require("./filesTemplate");
 const R = require("ramda");
+const { askQuestion } = require("./helpers");
 const configTemplate = require("./configTemplate");
 const startupDebugger = require("debug")("app:startup");
 
@@ -71,46 +72,84 @@ const writeReadableJson = R.pipe(
   R.replace(/":"/g, '": "'),
   R.replace(/":{/g, '": {'),
   R.split("\n"),
-  splitLines,
-  R.replace(/"/g, ""),
-  R.replace(/\\/g, '"')
+  splitLines
 );
 
-const partTranslate = R.pipe(
+const translate = R.pipe(
   JSON.parse,
   R.curry(makeTranslation)(""),
   writeReadableJson,
+  R.replace(/"/g, ""),
+  R.replace(/\\/g, '"'),
   translatejs
 );
 
-const writeToLanguage = (file) => {
-  const translation = JSON.parse(fs.readFileSync(file, "utf8"));
-  let newStructure = JSON.parse(stringsJSON);
-  newStructure = copyStructure(newStructure, translation);
-  let json = writeReadableJson(newStructure);
-  // json = json.replace(/}}/g, "}\n}\n")
-  fs.writeFileSync(file, json, "utf8");
+const writeToLanguage = (file, stringsJSON) => {
+  const jsonlike = fs.readFileSync(file, "utf8");
+  try {
+    const translation = JSON.parse(jsonlike);
+    try {
+      let newStructure = JSON.parse(stringsJSON);
+      newStructure = copyStructure(newStructure, translation);
+      let json = writeReadableJson(newStructure);
+      fs.writeFileSync(file, json, "utf8");
+    } catch (err) {
+      console.error(`JSON in file ${file} is not valid json...`, err);
+    }
+  } catch (err) {
+    console.error(`JSON in file ${file} is not valid json...`, err);
+  }
 };
 
 exports.run = (dir, localeStringsPath, templateLanguge) => {
   const pathToLanguages = `${dir}/languages`;
   const stringsJSON = fs.readFileSync(localeStringsPath, "utf8");
-  fs.readdirSync(pathToLanguages)
-    .filter((file) => file !== `${templateLanguge}.json`)
-    .forEach((file) => writeToLanguage(`${pathToLanguages}/${file}`));
+  fs.readdirSync(pathToLanguages).forEach((file) =>
+    writeToLanguage(`${pathToLanguages}/${file}`, stringsJSON)
+  );
   fs.writeFileSync(
     `${pathToLanguages}/${templateLanguge}.json`,
     stringsJSON,
     "utf8"
   );
-  fs.writeFileSync(
-    `${dir}/dist/translate.js`,
-    partTranslate(stringsJSON),
-    "utf8"
-  );
+  var i = stringsJSON;
+  fs.writeFileSync(`${dir}/dist/translate.js`, translate(stringsJSON), "utf8");
 };
+
+createOrDeleteLanguages = (dir, languages) => {
+  const pathToLanguages = `${dir}/languages`;
+  const languagesInFolder = fs
+    .readdirSync(pathToLanguages)
+    .map((lang) => lang.replace(".json", ""));
+  languages.forEach((lang) => {
+    const index = languagesInFolder.indexOf(lang);
+    if (index > -1) languagesInFolder.splice(index, 1);
+    else fs.writeFileSync(`${pathToLanguages}/${lang}.json`, "{}");
+  });
+
+  if (languagesInFolder.length)
+    askQuestion(
+      `Delete theese languages: [${languagesInFolder.join(", ")}]? [y/n]`
+    ).then((ans) => {
+      if (ans[0] === "y") {
+        languagesInFolder.forEach((lang) => {
+          fs.unlink(`${pathToLanguages}/${lang}.json`, (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+          });
+        });
+      }
+    });
+  // .filter((file) => languages.indexOf(file.replace(".json", "")))
+  // .
+  // .forEach((file) => writeToLanguage(`${pathToLanguages}/${file}`));
+};
+
 const createOrUpdatei18File = (path, languages) => {
   fs.writeFileSync(`${path}/dist/i18n.js`, i18File(languages), "utf8");
+  createOrDeleteLanguages(path, languages);
 };
 exports.createOrUpdatei18File = createOrUpdatei18File;
 

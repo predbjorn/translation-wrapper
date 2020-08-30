@@ -31,9 +31,11 @@ exports.watchConfigFile = (dir) =>
         askQuestion(
           "Config updated. Do you want to update config files and languagefolders? [y/n]"
         ).then((ans) => {
-          if (ans === "y" || ans === "yes") {
-            // f.createOrUpdatei18File(config(dir).LANGUAGES);
-            // do more stuff here...
+          if (ans[0] === "y") {
+            delete require.cache[configPath(dir)];
+            const { LANGUAGES, TEMPLATE_LOCALE_LANGUAGE } = config(dir);
+            f.createOrUpdatei18File(dir, LANGUAGES);
+            f.run(dir, localeStringsPath(dir), TEMPLATE_LOCALE_LANGUAGE);
           }
         });
       }

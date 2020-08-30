@@ -16,7 +16,6 @@ exports.PACKAGE = `{
 }`;
 
 exports.i18File = (languagesArray) => `import i18n from "i18n-js";
-import moment from "moment";
 
 ${languagesArray.map(
   (lang) => `import ${lang} from "../languages/${lang}.json";`

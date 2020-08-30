@@ -1,7 +1,7 @@
 ## Instaling
 
-Set the npm config variable to the path you want it installed to. Default is "./locale".
+Run translation-wrapper to install script
 
-Set it like this:
+## Config
 
-npm config set translations-wrapper:dir some/dir
+Update config in file translationWrapper/configLocale.js. Script must be running to be changed
