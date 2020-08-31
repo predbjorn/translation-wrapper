@@ -10,7 +10,7 @@ const LANGUAGES = ["en"]; // sequenced by priority
  *
  * See examples under
  */
-const defaultLocale = () => "en";
+const getLocale = () => "en";
 
 ///////////////////////////////////////////
 // example of react native implementation:
@@ -23,12 +23,15 @@ const defaultLocale = () => "en";
 //     : FALL_BACK;
 ///////////////////////////////////////////
 
-const localeToLang = tw.localeToLang;
+const localeToLang = (locale) => tw.localeToLang(locale);
+
+const getLang = () => tw.localeToLang(getLocale());
 
 module.exports = {
   FALL_BACK,
   LANGUAGES,
-  defaultLocale,
+  getLocale,
+  getLang,
   TEMPLATE_LOCALE_LANGUAGE,
   localeToLang,
 };

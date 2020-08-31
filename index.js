@@ -7,7 +7,7 @@ const localeToLang = (tag) => {
   return (
     languages &&
     languages[0] &&
-    languages[0].tag.substr(languages[0].tag.indexOf("-") + 1)
+    languages[0].tag.substr(languages[0].tag.indexOf("-") + 1).toLowerCase()
   );
 };
 exports.localeToLang = localeToLang;
