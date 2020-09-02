@@ -16,13 +16,14 @@ exports.PACKAGE = `{
 }`;
 
 exports.i18File = (languagesArray) => `import i18n from "i18n-js";
+import { getLang } from "../configLocale";
 
 ${languagesArray.map(
   (lang) => `import ${lang} from "../languages/${lang}.json";`
 )}
 
 
-i18n.locale = lang;
+i18n.locale = getLang();
 i18n.fallbacks = true;
 i18n.translations = {${languagesArray}};
 

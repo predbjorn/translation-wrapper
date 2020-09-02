@@ -4,7 +4,7 @@ const { watchTemplate, watchConfigFile } = require("./watch");
 const { askQuestion } = require("./helpers");
 
 // var dir = `${process.cwd()}/${process.env.npm_package_config_dir}`;
-const configDir = "translationWrapper";
+const configDir = "src/translationWrapper";
 var dir = `${process.cwd()}/${configDir}`;
 if (!fs.existsSync(dir) && !fs.existsSync(dir + "/dist")) {
   askQuestion(
@@ -32,3 +32,5 @@ if (!fs.existsSync(dir) && !fs.existsSync(dir + "/dist")) {
 // Create a CLI with arguments (able to change folder etc.)
 // Alias ??? (locale vs language)
 //
+
+// Create a server ??
