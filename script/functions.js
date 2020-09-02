@@ -4,6 +4,7 @@ const {
   DEFAULT_SHEET,
   PACKAGE,
   i18File,
+  INDEX,
 } = require("./filesTemplate");
 const R = require("ramda");
 const { askQuestion } = require("./helpers");
@@ -159,6 +160,7 @@ exports.init = (path) => {
   fs.mkdirSync(`${path}/languages`);
   fs.mkdirSync(`${path}/dist`);
   fs.writeFileSync(`${path}/localeStrings.json`, DEFAULT_SHEET, "utf8");
+  fs.writeFileSync(`${path}/index`, INDEX, "utf8");
   fs.writeFileSync(`${path}/package.json`, PACKAGE, "utf8");
   fs.copyFile(
     `${__dirname}/configTemplate.js`,

@@ -12,15 +12,19 @@ exports.DEFAULT_SHEET = `{
 exports.PACKAGE = `{
 	"name": "tw",
 	"version": "0.0.1",
-	"main": "./dist/translate"
+	"main": "index.js"
 }`;
+
+exports.INDEX = `export { default } from "./dist/index";
+export { FALL_BACK, LANGUAGES, getLocale, getLang, TEMPLATE_LOCALE_LANGUAGE, localeToLang } from './configLocale';
+`;
 
 exports.i18File = (languagesArray) => `import i18n from "i18n-js";
 import { getLang } from "../configLocale";
 
-${languagesArray.map(
-  (lang) => `import ${lang} from "../languages/${lang}.json";`
-)}
+${languagesArray
+  .map((lang) => `import ${lang} from "../languages/${lang}.json";`)
+  .join("\n")}
 
 
 i18n.locale = getLang();
