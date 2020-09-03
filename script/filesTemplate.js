@@ -15,7 +15,7 @@ exports.PACKAGE = `{
 	"main": "index.js"
 }`;
 
-exports.INDEX = `export { default } from "./dist/index";
+exports.INDEX = `export { default } from "./dist/translate";
 export { FALL_BACK, LANGUAGES, getLocale, getLang, TEMPLATE_LOCALE_LANGUAGE, localeToLang } from './configLocale';
 `;
 
