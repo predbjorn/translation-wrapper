@@ -1,7 +1,7 @@
 {
   "name": "translation-wrapper",
   "author": "Preben Hafnor <prebenhafnor@gmail.com>",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "index.js",
   "config": {
     "dir": "translation-wrapper"
