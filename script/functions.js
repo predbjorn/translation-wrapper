@@ -35,7 +35,7 @@ makeTranslation = (path, tree) => {
       const newPath = path + (path.length == 0 ? "" : ".") + key;
       tree[key] = makeTranslation(newPath, tree[key]);
     } else {
-      tree[key] = `strings("${path}.${key}")`;
+      tree[key] = `() => strings("${path}.${key}")`;
     }
   });
   return tree;
