@@ -10,6 +10,7 @@ const R = require("ramda");
 const { askQuestion } = require("./helpers");
 const configTemplate = require("./configTemplate");
 const startupDebugger = require("debug")("app:startup");
+const prettier = require("prettier");
 
 copyStructure = (newStructure, translation) => {
   Object.keys(newStructure).forEach((key) => {
@@ -62,6 +63,8 @@ splitLines = (lines) => {
   return output;
 };
 
+// const writeReadableJson = (json) =>
+//   prettier.format(json, { semi: false, parser: "json" });
 const writeReadableJson = R.pipe(
   JSON.stringify,
   R.replace(/\\",/g, "&&&"),
@@ -88,11 +91,13 @@ const translate = R.pipe(
 const writeToLanguage = (file, stringsJSON) => {
   const jsonlike = fs.readFileSync(file, "utf8");
   try {
-    const translation = JSON.parse(jsonlike);
+    const parsedContent = jsonlike.replaceAll("\\u00AD", "&&&&");
+    const translation = JSON.parse(parsedContent);
     try {
       let newStructure = JSON.parse(stringsJSON);
       newStructure = copyStructure(newStructure, translation);
       let json = writeReadableJson(newStructure);
+      json = json.replaceAll("&&&&", "\\u00AD");
       fs.writeFileSync(file, json, "utf8");
     } catch (err) {
       console.error(`JSON in file ${file} is not valid json...`, err);
